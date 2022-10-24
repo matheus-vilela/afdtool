@@ -1,0 +1,20 @@
+4
+AC
+AD
+BC
+BD
+2
+0
+1
+8
+AC 0 BC
+AD 0 BD
+AC 1 AD
+AD 1 AC
+BC 0 AC
+BD 0 AD
+BC 1 BD
+BD 1 BC
+AC
+1
+AC
