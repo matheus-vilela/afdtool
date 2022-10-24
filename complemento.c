@@ -33,7 +33,9 @@ void converterParaTxt(AFD afd, char *nomeArquivo) {
     for(int i = 0; i < afd.quantidades[0]; i++) {
       int existe = 0;
       for (int j = 0; j < afd.quantidades[3]; j++) {
-        if (strcmp(afd.estados[i], afd.estadosFinais[j]) == 0) {
+
+        if (strcmp(strtok(afd.estados[i], "\n"), strtok(afd.estadosFinais[j], "\n")) == 0) {
+        printf("ESTADO FINAL ==> %s %s\n", afd.estadosFinais[j], afd.estados[i]);
           existe = 1;
         }
       }
