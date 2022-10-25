@@ -24,25 +24,25 @@ void calcularUniao(AFD afd, AFD afd2, char *nomeArquivo) {
           char *estado2 = strtok(afd2.estados[j], "\n");
           fprintf(arquivoTxt, "%s%s\n", afd.estados[i], afd2.estados[j]);
           for (int k = 0; k < afd.quantidades[3]; k++) {
-          for (int l = 0; l < afd2.quantidades[3]; l++) {
-            estadoFinal = afd.estadosFinais[k][0];
-            estadoFinal2 = afd2.estadosFinais[l][0];
-            compare = afd.estados[i][0];
-            compare2 = afd2.estados[j][0];
-            if (estadoFinal == compare || estadoFinal == compare || estadoFinal2 == compare2) {
-              //Concat compare and compare2
-              char *estadoConcat = malloc(2);
-              estadoConcat[0] = compare;
-              estadoConcat[1] = compare2;
-              estadoConcat[2] = '\0';
-              afd3.estadosFinais[afd3.quantidades[3]][0] = estadoConcat[0];
-              afd3.estadosFinais[afd3.quantidades[3]][1] = estadoConcat[1];
-              printf("ESTADO FINAL ==> %s\n", afd3.estadosFinais[afd3.quantidades[3]]);
-              afd3.quantidades[3]++;
+            for (int l = 0; l < afd2.quantidades[3]; l++) {
+              estadoFinal = afd.estadosFinais[k][0];
+              estadoFinal2 = afd2.estadosFinais[l][0];
+              compare = afd.estados[i][0];
+              compare2 = afd2.estados[j][0];
+              if (estadoFinal == compare || estadoFinal == compare || estadoFinal2 == compare2) {
+                //Concat compare and compare2
+                char *estadoConcat = malloc(2);
+                estadoConcat[0] = compare;
+                estadoConcat[1] = compare2;
+                estadoConcat[2] = '\0';
+                afd3.estadosFinais[afd3.quantidades[3]][0] = estadoConcat[0];
+                afd3.estadosFinais[afd3.quantidades[3]][1] = estadoConcat[1];
+                printf("ESTADO FINAL ==> %s\n", afd3.estadosFinais[afd3.quantidades[3]]);
+                afd3.quantidades[3]++;
 
+              }
             }
           }
-        }
         }
     }
     fprintf(arquivoTxt, "%d\n", afd.quantidades[1]);
@@ -52,49 +52,28 @@ void calcularUniao(AFD afd, AFD afd2, char *nomeArquivo) {
 
     fprintf(arquivoTxt, "%d\n", afd.quantidades[1] * quantidadeTotalEstados);
     
-    char initial, simbolo, destino;
-    char *transicao;
-    char initial2, simbolo2, destino2;
-    char *transicao2;
+    TRANSICAO transicao1; 
+    TRANSICAO transicao2;
+
     for (int i = 0; i < afd.quantidades[2]; i++) {
-      transicao = strtok(afd.transicoes[i], "\n");
-      initial = transicao[0];
-      simbolo = transicao[2];
-      destino = transicao[4];
+      char transicao_1[50];
+      strcpy(transicao_1, afd.transicoes[i]);
+      transicao1 = dividirTransicao(transicao_1);
 
       for(int j = 0; j < afd2.quantidades[2]; j++) {
-        transicao2 = strtok(afd2.transicoes[j], "\n");
-        initial2 = transicao2[0];
-        simbolo2 = transicao2[2];
-        destino2 = transicao2[4];
+        char transicao_2[50];
+        strcpy(transicao_2, afd2.transicoes[j]);
+        transicao2 = dividirTransicao(transicao_2);
 
-        if (simbolo == simbolo2) {
-          fprintf(arquivoTxt, "%c%c %c %c%c\n", initial, initial2, simbolo, destino, destino2);
+        if (strcmp(strtok(transicao1.simbolo, "\n"), strtok(transicao2.simbolo, "\n")) == 0) {
+          fprintf(arquivoTxt, "%s%s %s %s%s\n", strtok(transicao1.entrada, "\n"), strtok(transicao2.entrada, "\n"), strtok(transicao1.simbolo, "\n"), strtok(transicao1.saida, "\n"), strtok(transicao2.saida, "\n"));
         }
       }
     }
 
-    char estadoInicial, estadoInicial2;
-    estadoInicial = afd.estadoInicial[0];
-    estadoInicial2 = afd2.estadoInicial[0];
-    fprintf(arquivoTxt, "%c%c\n", estadoInicial, estadoInicial2);
-    
-    int quantidadeEstadosFinais = 0;
-    
-    for(int i = 0; i < afd.quantidades[3]; i++) {
-      for(int j = 0; j < afd2.quantidades[3]; j++) {
-        quantidadeEstadosFinais++;
-      }
-    }
+    fprintf(arquivoTxt, "%s%s\n", strtok(afd.estadoInicial, "\n"), strtok(afd2.estadoInicial, "\n"));
 
 
-    // char estadoFinal, estadoFinal2;
-    //Print afd3 estadosFinais
-    // for(int i = 0; i < afd.quantidades[0]; i++) {
-    //   for(int j = 0; j < afd2.quantidades[0]; j++) {
-        
-    //   }
-    // }
     fprintf(arquivoTxt, "%d\n", afd3.quantidades[3]);
     for(int i = 0; i < afd3.quantidades[3]; i++) {
       fprintf(arquivoTxt, "%s\n", afd3.estadosFinais[i]);

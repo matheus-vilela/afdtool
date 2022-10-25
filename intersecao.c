@@ -35,34 +35,29 @@ void calcularIntersecao(AFD afd, AFD afd2, char *nomeArquivo) {
     
 
     //Calcula a intersecao das transicoes
-    char initial, simbolo, destino;
-    char *transicao;
-    char initial2, simbolo2, destino2;
-    char *transicao2;
+
+    TRANSICAO transicao1; 
+    TRANSICAO transicao2;
+
     for (int i = 0; i < afd.quantidades[2]; i++) {
-      transicao = strtok(afd.transicoes[i], "\n");
-      initial = transicao[0];
-      simbolo = transicao[2];
-      destino = transicao[4];
+      char transicao_1[50];
+      strcpy(transicao_1, afd.transicoes[i]);
+      transicao1 = dividirTransicao(transicao_1);
 
       for(int j = 0; j < afd2.quantidades[2]; j++) {
-        transicao2 = strtok(afd2.transicoes[j], "\n");
-        initial2 = transicao2[0];
-        simbolo2 = transicao2[2];
-        destino2 = transicao2[4];
+        char transicao_2[50];
+        strcpy(transicao_2, afd2.transicoes[j]);
+        transicao2 = dividirTransicao(transicao_2);
 
-        if (simbolo == simbolo2) {
-          fprintf(arquivoTxt, "%c%c %c %c%c\n", initial, initial2, simbolo, destino, destino2);
+        if (strcmp(strtok(transicao1.simbolo, "\n"), strtok(transicao2.simbolo, "\n")) == 0) {
+          fprintf(arquivoTxt, "%s%s %s %s%s\n", strtok(transicao1.entrada, "\n"), strtok(transicao2.entrada, "\n"), strtok(transicao1.simbolo, "\n"), strtok(transicao1.saida, "\n"), strtok(transicao2.saida, "\n"));
         }
 
       }
     }
 
     //Calcula a intersecao do estado inicial
-    char estadoInicial, estadoInicial2;
-    estadoInicial = afd.estadoInicial[0];
-    estadoInicial2 = afd2.estadoInicial[0];
-    fprintf(arquivoTxt, "%c%c\n", estadoInicial, estadoInicial2);
+    fprintf(arquivoTxt, "%s%s\n", strtok(afd.estadoInicial, "\n"), strtok(afd2.estadoInicial, "\n"));
     
 
     //Calcula a intersecao dos estados finais
@@ -81,7 +76,7 @@ void calcularIntersecao(AFD afd, AFD afd2, char *nomeArquivo) {
       for(int j = 0; j < afd2.quantidades[3]; j++) {
         estadoFinal = afd.estadosFinais[i][0];
         estadoFinal2 = afd2.estadosFinais[j][0];
-        fprintf(arquivoTxt, "%c%c\n", estadoFinal, estadoFinal2);
+        fprintf(arquivoTxt, "%s%s\n", strtok(afd.estadosFinais[i], "\n"), strtok(afd2.estadosFinais[j], "\n"));
       }
     }
 

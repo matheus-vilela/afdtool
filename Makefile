@@ -1,7 +1,7 @@
 # DEPS = afd.h
 
-afdtool: main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o 
-	gcc main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o -o afdtool
+afdtool: main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o minimizacao.o 
+	gcc main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o minimizacao.o -o afdtool
 
 main.o: main.c
 	gcc -c main.c
@@ -23,6 +23,9 @@ uniao.o: uniao.c uniao.h
 
 reconhecer.o: reconhecer.c reconhecer.h
 	gcc -c reconhecer.c
+
+minimizacao.o: minimizacao.c minimizacao.h
+	gcc -c minimizacao.c
 
 clean:
 	rm *.o */*.dot */*.svg afdtool

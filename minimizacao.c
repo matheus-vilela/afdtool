@@ -9,11 +9,11 @@
 #define MINIMIZACAO "--minimizacao"
 #define OUTPUT "--output"
 
-void calcularIntersecao(AFD afd, char *nomeArquivo) {
+void calcularMinimizacao(AFD afd, char *nomeArquivo) {
     FILE *arquivoTxt;
     arquivoTxt = fopen(nomeArquivo, "w");
 
-    COLECAO minimizacao;
+    CONJUNTOS minimizacao;
 
    
 
