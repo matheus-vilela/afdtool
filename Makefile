@@ -1,5 +1,3 @@
-# DEPS = afd.h
-
 afdtool: main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o minimizacao.o 
 	gcc main.o afd.o visualizacao.o complemento.o intersecao.o uniao.o reconhecer.o minimizacao.o -o afdtool
 
