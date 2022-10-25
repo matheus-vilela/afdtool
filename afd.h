@@ -5,6 +5,16 @@
 #include <string.h>
 #include <stdio.h>
 
+
+//==============================================================================
+// Estruturas
+
+// quantidades[0] = quantidade de estados
+// quantidades[1] = quantidade de simbolos
+// quantidades[2] = quantidade de transicao
+// quantidades[3] = quantidade de estados finais
+
+//==============================================================================
 typedef struct afd {
     char estados[50][50];
     char alfabeto[50][50];

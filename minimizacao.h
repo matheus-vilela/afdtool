@@ -5,16 +5,14 @@
 #include <stdio.h>
 
 
-typedef struct palavras {
+typedef struct estados {
   char palavras[50][50];
-} PALAVRAS;
+} ESTADOS;
 
-typedef struct conjuntos {
-  PALAVRAS palavras[50];
-  int quantidade;
-} CONJUNTOS;
-
-
+typedef struct colecoes {
+  ESTADOS estados[50];
+  int quantidades[50];
+} COLECOES;
 
 void minimizacao(int argc, char *argv[]);
 
